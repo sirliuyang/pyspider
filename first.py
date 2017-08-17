@@ -8,10 +8,9 @@ class QuotesSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for eachdiv in response.css('h3'):
-            yield {
-                'links':eachdiv.xpath('')
-            }
+        table = {}
+        table['result'] = response.css('h3').extract()
+        yield table
         '''
         for quote in response.css('div.quote'):
             yield {
