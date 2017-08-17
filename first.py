@@ -8,9 +8,12 @@ class QuotesSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        table = {}
-        table['result'] = response.css('h3').extract()
-        yield table
+        #table = {}
+        #table['result'] = response.css('h3 a::attr(href)').extract()
+        for item in response.css('h3 a::attr(href)').extract():
+            yield {
+                'link' : item
+            }
         '''
         for quote in response.css('div.quote'):
             yield {
